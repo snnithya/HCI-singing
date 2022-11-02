@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.21/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/1.2.6/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nexusui@2.0.13/dist/NexusUI.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.18.1"></script>
+
+    <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@^1.19.0/es6/music_rnn.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.js"></script>
+
+    <!-- Tone Library recommended in Bitrate slack channel for music conversations -->
+    <script src="https://cdn.jsdelivr.net/npm/@tonaljs/tonal/browser/tonal.min.js"></script>
+    <title>Let's practice!</title>
+
+    <!-- Materialize UI CSS and JS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <!-- <script src="/static/scripts/plotly/dependencies/d3.v3.min.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="{{ url_for('static',filename='js/script.js') }}" defer></script>
+</head>
+
+<body>
+    <nav>
+        <div style="padding-bottom: 20px;" class="nav-wrapper indigo lighten-3">
+
+        </div>
+    </nav>
+    <h2></h2>
+
+    <div class="container">
+
+
+        <h4 style="font-family: 'Nanum Myeongjo', serif;">Lesson 1 </h4>
+        <div id="myDiv"></div>
+
+        <div id="test1" class="col s12">
+            <h1></h1>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop" style="display:none">Stop</button>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="practice-test">Start Practice</button>
+            <p class="score">Current Score <span style="font-family: 'Roboto';">:   </span> <span id="test1-score">-</span> / 7</p>
+            <div class="main-container" id="main-container">
+                <div class="note-container" id="note-container"></div>
+                <div class="sequencer" id="sequencer"></div>
+                <div class="main-container" , id="envelope"></div>
+            </div>
+
+            <a href="#test2" id="tabs-button-1" class="waves-effect waves-light btn-flat btn-large indigo lighten-5 switch-tab-btn">Go to Lessons
+                    <i class="next-icon material-icons">navigate_next</i></a>
+        </div>
+
+        <div id="test2" class="col s12">
+            <h1></h1>
+            <p style="font-family: 'Nanum Gothic', sans-serif;">
+                Before we starting singing, we need to understand our breathing pattern and posture. <br><br><br>
+                <iframe width="660" height="385" src="https://www.youtube.com/embed/4-CYJRmZn48" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </p>
+            <h1></h1>
+
+            <a href="#test3" id="tabs-button-2" class="waves-effect waves-light btn-flat btn-large indigo lighten-5 switch-tab-btn">Next 
+                    <i class="next-icon material-icons">navigate_next</i></a>
+        </div>
+
+        <div id="test3" class="col s12">
+            <h1></h1>
+            <p style="font-family: 'Nanum Gothic', sans-serif;">
+                The C note is very important. It is the home base. The center of the music universe, some say. <br> It is the reference point to navigate to and from other notes. This lesson will focus on tuning your sense of the C note. Before you begin
+                singing in any context, it's import to always hum a C to yourself. This video will teach you how.
+            </p> <br>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/AQ7bJuW_PDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h1></h1>
+            <a href="#test4" id="tabs-button-3" class="waves-effect waves-light btn-flat btn-large indigo lighten-5 switch-tab-btn">Practice 
+                    <i class="next-icon material-icons">navigate_next</i></a>
+        </div>
+
+        <div id="test4" class="col s12">
+            <h1></h1>
+            <p style="font-family: 'Nanum Gothic', sans-serif;">
+                Using what you've learned about posture, breathing, and hitting the C note, attempt the sequence below. <br> Feel free to attempt this sequence multiple times by clicking Start again. Try to aim for a perfect score before moving onto the
+                next practice!
+            </p>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop-2" style="display:none">Stop</button>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="practice-2">Start Practice</button>
+
+            <p class="score">Current Score <span style="font-family: 'Roboto';">:   </span> <span id="test4-score">-</span> / 6</p>
+            <div class="main-container" id="main-container-2">
+                <div class="note-container" id="note-container-2"></div>
+                <div class="sequencer" id="sequencer-2"></div>
+            </div>
+            <a href="#test5" id="tabs-button-4" class="waves-effect waves-light btn-flat btn-large indigo lighten-5 switch-tab-btn">Next
+                    <i class="next-icon material-icons">navigate_next</i></a>
+        </div>
+
+        <div id="test5" class="col s12">
+            <h1></h1>
+            <p style="font-family: 'Nanum Gothic', sans-serif;">
+                Here is another practice sequence with the first 3 notes- C D and E. <br> All the best!
+            </p>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop-3" style="display:none">Stop</button>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="practice-3">Start Practice</button>
+
+            <p class="score">Current Score <span style="font-family: 'Roboto';">:   </span> <span id="test5-score">-</span> / 7</p>
+            <div class="main-container" id="main-container-3">
+                <div class="note-container" id="note-container-3"></div>
+                <div class="sequencer" id="sequencer-3"></div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body> -->
