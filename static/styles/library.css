@@ -1,0 +1,185 @@
+.choose {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.genre {
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    font-size: 200%;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.selected {
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    font-size: 200%;
+    font-family: "Times New Roman", Times, serif;
+}
+
+#startSinging {
+  position: absolute;
+  left: 75%;
+  top: 10%;
+  font-size: 200%;
+  font-family: "Times New Roman", Times, serif;
+  border-radius: 5px;
+}
+
+.singButton {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 10px;
+}
+
+.singButton:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  cursor: pointer;
+}
+
+#mySong {
+    position: absolute;
+    left: 40%;
+    top: 15%;
+    font-size: 200%;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.top_songs {
+    position: absolute;
+    left: 70%;
+    top: 25%;
+    font-size: 200%;
+    font-family: "Times New Roman", Times, serif;
+}
+
+
+.wrapper {
+    position: fixed;
+    left: 15%;
+    top: 35%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background-color: #f5f8ff;
+  }
+  .wrapper {
+    width: 95%;
+    margin: 0 auto;
+    position: absolute;
+    padding-bottom: 50px;
+  }
+  #search-container {
+    margin: 1em 0;
+  }
+  #search-container input {
+    background-color: transparent;
+    width: 40%;
+    border-bottom: 2px solid #110f29;
+    padding: 1em 0.3em;
+  }
+  #search-container input:focus {
+    border-bottom-color: #04AA6D;;
+  }
+  #search-container button {
+    padding: 1em 2em;
+    margin-left: 1em;
+    background-color: #04AA6D;;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-top: 0.5em;
+  }
+  .button-value {
+    border: 2px solid #04AA6D;;
+    padding: 1em 2.2em;
+    border-radius: 3em;
+    background-color: transparent;
+    color: #04AA6D;
+    cursor: pointer;
+  }
+  .active {
+    background-color: #04AA6D;
+    color: #ffffff;
+  }
+  #products {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 5.5em;
+    max-width:50%;
+  }
+  .card {
+    background-color: #ffffff;
+    max-width: 18em;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 1em 2em 2.5em rgba(1, 2, 68, 0.08);
+  }
+  .container {
+    padding-top: 1em;
+    color: #110f29;
+  }
+  .container h5 {
+    font-weight: 500;
+  }
+  .hide {
+    display: none;
+  }
+
+  .vertical-menu {
+    width: 200px; /* Set a width if you like */
+    position: absolute;
+    left: 70%;
+    top: 35%;
+    z-index: 1;
+  }
+  
+  .vertical-menu a {
+    background-color: white; /* Grey background color */
+    color: black; /* Black text color */
+    display: block;
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+    margin: 12px;
+    border-radius: 5px;
+  }
+  
+  @media screen and (max-width: 720px) {
+    img {
+      max-width: 100%;
+      object-fit: contain;
+      height: 10em;
+    }
+    .card {
+      max-width: 10em;
+      margin-top: 1em;
+    }
+    #products {
+      grid-template-columns: auto auto;
+      grid-column-gap: 1em;
+    }
+
+    
+  }
+
+
+  
+  
