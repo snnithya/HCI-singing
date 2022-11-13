@@ -1,4 +1,4 @@
-from flask import Flask, render_template, render_template
+from flask import Flask, render_template, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -7,10 +7,29 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/practice')
-def practice():
-    return render_template('practice.html')
+@app.route('/singing')
+def singing():
+    return render_template('singing.html')
+
+@app.route('/getmethod/csv')
+def get_javascript_data(jsdata):
+    return jsdata
+
+@app.route('/postmethod', methods = ['POST'])
+def get_post_javascript_data():
+    print(request)
+    jsdata = request.form["x"]
+    print(jsdata)
+    return jsdata
 
 
-if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1', port=5000)
+@app.route('/listening')
+def listening():
+    return render_template('listening.html')
+
+@app.route('/report')
+def report():
+    return render_template('report.html')
+
+if __name__ == "__main__": 
+   app.run(debug=True)

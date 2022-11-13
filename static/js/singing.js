@@ -19,11 +19,19 @@ let currentPitch = 0;
 let currentTime = 0;
 let startTime = 0;
 let audioContext;
+var recorder;
 var buflen = 2048;
 var buf = new Float32Array( buflen );
 var pitchTimer = null;
 var drawTimer = null;
+var path = "static/pitch/RITD.csv";
 
+function testJS() {
+    var b = document.getElementById('myDiv').value,
+        url = 'static/report.html?name=' + encodeURIComponent(b);
+
+    document.location.href = url;
+}
 
 document.getElementById("practice-test").onclick = () => {
     startPractice()
@@ -32,11 +40,23 @@ document.getElementById("practice-test").onclick = () => {
 
 document.getElementById("stop").onclick = () => {
     stopPractice();
-    console.log('stopping practice');
+    // console.log('stopping practice');
 }
 
 function stopPractice() {
     runPitch = false;
+    stored_data = document.getElementById("myDiv").data[0];
+    console.log(type(stored_data['x']));
+    $.post( "/postmethod", {
+        "x": stored_data['x']
+    });
+    
+    // const file = createBlob(stored_data);
+    // saveAs(file, "static/myFile.txt");
+    // console.log(recorder);
+    // recorder.stopRecording();
+    // let blob = recorder.getBlob();
+    // invokeSaveAsDialog(blob);
 }
 
 function startPractice() {
@@ -100,19 +120,29 @@ async function setup() {
         }
         }]
     });
+
+    // let recordStream = await navigator.mediaDevices.getUserMedia({canvas: true, audio: true});
+    // recorder = new RecordRTCPromisesHandler(document.getElementById('myDiv'), {
+    //     type: 'audio'
+    // });
    
     startPitch(stream);
     requestAnimationFrame(draw);
 }
 
+function plotOrigPitch(path) {
+    Plotly.d3.csv(path, function(data){ processData(data) } );
+}
+
 function startPitch(stream) {
     // read data from csv and plot the OG contour
     console.log('in startPitch');
-    Plotly.d3.csv("static/pitch/RITD.csv", function(data){ processData(data) } );
+    // recorder.startRecording();
+    plotOrigPitch(path);
     startTime = new Date();
-    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+    // mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
-    setInterval(shiftPlot, 500);    // call to shift the plot every 500 ms
+    setInterval(shiftPlot, 250);    // call to shift the plot every 500 ms
     pitch = ml5.pitchDetection('static/js/model', audioContext , stream, modelLoaded); // pitch detection
     
 }

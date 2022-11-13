@@ -35,7 +35,7 @@
     <!-- <script src="/static/scripts/plotly/dependencies/d3.v3.min.js"></script> -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <script src="{{ url_for('static',filename='js/script.js') }}" defer></script>
+    <script src="{{ url_for('static',filename='js/listening.js') }}" defer></script>
 </head>
 
 <body>
@@ -49,26 +49,21 @@
     <div class="container">
 
 
-        <h4 style="font-family: 'Nanum Myeongjo', serif;">Lesson 1 </h4>
+        <h4 style="font-family: 'Nanum Myeongjo', serif;">Let's Listen! </h4>
+        <h5 id="songName" style="font-family: 'Nanum Myeongjo', serif;"> </h5>
         <div id="myDiv"></div>
 
-        <div id="test1" class="col s12">
+        <div id="test1 " class="col s16 ">
             <h1></h1>
-            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop">Stop</button>
-            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="practice-test">Start Practice</button>
-            <p class="score">Current Score <span style="font-family: 'Roboto';">:   </span> <span id="test1-score">-</span> / 7</p>
-            <div class="main-container" id="main-container">
-                <div class="note-container" id="note-container"></div>
-                <div class="sequencer" id="sequencer"></div>
-                <div class="main-container" , id="envelope"></div>
-            </div>
-
-            <a href="#test2" id="tabs-button-1" class="waves-effect waves-light btn-flat btn-large indigo lighten-5 switch-tab-btn">Go to Lessons
-                    <i class="next-icon material-icons">navigate_next</i></a>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice " id="start">Listen</button>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice " id="stop">Stop</button>
+            <a href="{{ url_for( 'singing') }} " class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice right " id="get-started ">Sing</a>
         </div>
 
 
+
+
     </div>
     </div>
 
-</body> -->
+</body>
