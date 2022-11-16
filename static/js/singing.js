@@ -24,14 +24,7 @@ var buflen = 2048;
 var buf = new Float32Array( buflen );
 var pitchTimer = null;
 var drawTimer = null;
-var path = "static/pitch/RITD.csv";
-
-function testJS() {
-    var b = document.getElementById('myDiv').value,
-        url = 'static/report.html?name=' + encodeURIComponent(b);
-
-    document.location.href = url;
-}
+var path = "static/pitch/RITD-100-0.csv";
 
 document.getElementById("practice-test").onclick = () => {
     startPractice()
@@ -46,17 +39,13 @@ document.getElementById("stop").onclick = () => {
 function stopPractice() {
     runPitch = false;
     stored_data = document.getElementById("myDiv").data[0];
-    console.log(type(stored_data['x']));
-    $.post( "/postmethod", {
-        "x": stored_data['x']
-    });
-    
-    // const file = createBlob(stored_data);
-    // saveAs(file, "static/myFile.txt");
-    // console.log(recorder);
-    // recorder.stopRecording();
-    // let blob = recorder.getBlob();
-    // invokeSaveAsDialog(blob);
+    console.log(JSON.stringify(stored_data))
+    fetch("/postmethod", {
+        "method": "POST",
+        "mode": "cors",
+        "headers": {"Content-Type": "application/json"},
+        "body": JSON.stringify(stored_data),
+    })
 }
 
 function startPractice() {
@@ -131,6 +120,7 @@ async function setup() {
 }
 
 function plotOrigPitch(path) {
+    console.log('in plot orgi pitch', path);
     Plotly.d3.csv(path, function(data){ processData(data) } );
 }
 

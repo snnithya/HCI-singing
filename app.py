@@ -2,25 +2,28 @@ from flask import Flask, render_template, render_template, request, jsonify
 
 app = Flask(__name__)
 
+singing_data = {
+    "x": [],
+    "y": []
+}
 # API
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('library.html')
 
 @app.route('/singing')
 def singing():
     return render_template('singing.html')
 
-@app.route('/getmethod/csv')
-def get_javascript_data(jsdata):
-    return jsdata
+@app.route('/getmethod')
+def get_javascript_data():
+    return singing_data
 
 @app.route('/postmethod', methods = ['POST'])
 def get_post_javascript_data():
-    print(request)
-    jsdata = request.form["x"]
-    print(jsdata)
-    return jsdata
+    global singing_data
+    singing_data = request.json
+    return singing_data
 
 
 @app.route('/listening')

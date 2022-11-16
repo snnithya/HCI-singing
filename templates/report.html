@@ -34,9 +34,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <!-- <script src="/static/scripts/plotly/dependencies/d3.v3.min.js"></script> -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
 
-    <script src="{{ url_for('static',filename='js/singing.js') }}" defer></script>
+    <script src="{{ url_for('static',filename='js/report.js') }}" defer></script>
 </head>
 
 <body>
@@ -50,14 +49,13 @@
     <div class="container">
 
 
-        <h4 style="font-family: 'Nanum Myeongjo', serif;">Lesson 1 </h4>
+        <h4 style="font-family: 'Nanum Myeongjo', serif;">Report </h4>
         <h5 id="songName" style="font-family: 'Nanum Myeongjo', serif;"> </h5>
         <div id="myDiv"></div>
 
         <div id="test1" class="col s12">
             <h1></h1>
-            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="practice-test">Start Practice</button>
-            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop">Stop</button>
+            <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop">Done!</button>
         </div>
 
 

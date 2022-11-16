@@ -24,38 +24,11 @@ var buflen = 2048;
 var buf = new Float32Array( buflen );
 var pitchTimer = null;
 var drawTimer = null;
-var path = "static/pitch/RITD.csv";
+var path = "static/pitch/RITD-100-0.csv";
 
-window.onload = function () {
-    $.get( "/getmethod/<javascript_data>" );
-}
-
-document.getElementById("practice-test").onclick = () => {
-    startPractice()
-    console.log('starting practice')
-}
-
-document.getElementById("stop").onclick = () => {
-    stopPractice();
-    // console.log('stopping practice');
-}
-
-function stopPractice() {
-    runPitch = false;
-    stored_data = document.getElementById("myDiv").data[0]
-    
-    const file = createBlob(stored_data);
-    saveAs(file, "static/myFile.txt");
-    // console.log(recorder);
-    // recorder.stopRecording();
-    // let blob = recorder.getBlob();
-    // invokeSaveAsDialog(blob);
-}
-
-function startPractice() {
-    runPitch = true;
+window.onload = function() {
     setup();
-};
+}
 
 // Pitch Detection
 
@@ -64,9 +37,6 @@ let pitch;
 let stream;
 
 async function setup() {
-    audioContext = new AudioContext();
-    console.log('sample rate', audioContext.sampleRate)
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
     
     // initialise plots
     await Plotly.newPlot('myDiv', 
@@ -96,134 +66,46 @@ async function setup() {
         },
         xaxis: {
             range: [-3, 7]
-        },
-        shapes: [
-
-        //line vertical
-
-        {
-        type: 'line',
-        x0: 0,
-        y0: -500,
-        x1: 0,
-        y1: 1900,
-        line: {
-            color: 'rgb(55, 128, 191)',
-            width: 3
         }
-        }]
-    });
+        // shapes: [
 
-    let recordStream = await navigator.mediaDevices.getUserMedia({canvas: true, audio: true});
-    recorder = new RecordRTCPromisesHandler(document.getElementById('myDiv'), {
-        type: 'audio'
+        // //line vertical
+
+        // {
+        // type: 'line',
+        // x0: 0,
+        // y0: -500,
+        // x1: 0,
+        // y1: 1900,
+        // line: {
+        //     color: 'rgb(55, 128, 191)',
+        //     width: 3
+        // }
+        // }]
     });
    
-    startPitch(stream);
-    requestAnimationFrame(draw);
+    plotPitch();
 }
 
 function plotOrigPitch(path) {
     Plotly.d3.csv(path, function(data){ processData(data) } );
 }
 
-function startPitch(stream) {
+function plotPitch() {
     // read data from csv and plot the OG contour
-    console.log('in startPitch');
-    recorder.startRecording();
     plotOrigPitch(path);
-    startTime = new Date();
-    mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
-    setInterval(shiftPlot, 250);    // call to shift the plot every 500 ms
-    pitch = ml5.pitchDetection('static/js/model', audioContext , stream, modelLoaded); // pitch detection
+    // plot singer's pitch
+    fetch("/getmethod")
+    .then((response) => response.json())
+    .then((data) => Plotly.extendTraces('myDiv', {
+        x: [data["x"]], 
+      y: [data["y"]]
+    }, [0]));
+
     
 }
 
-// function autoCorrelate( buf, sampleRate ) {
-// 	// Implements the ACF2+ algorithm
-// 	var SIZE = buf.length;
-//     console.log('size', SIZE);
-// 	var rms = 0;
-
-// 	for (var i=0;i<SIZE;i++) {
-// 		var val = buf[i];
-// 		rms += val*val;
-// 	}
-// 	rms = Math.sqrt(rms/SIZE);
-// 	if (rms<0.01) // not enough signal
-// 		return -1;
-
-// 	var r1=0, r2=SIZE-1, thres=0.2;
-// 	for (var i=0; i<SIZE/2; i++)
-// 		if (Math.abs(buf[i])<thres) { r1=i; break; }
-// 	for (var i=1; i<SIZE/2; i++)
-// 		if (Math.abs(buf[SIZE-i])<thres) { r2=SIZE-i; break; }
-
-// 	buf = buf.slice(r1,r2);
-// 	SIZE = buf.length;
-
-// 	var c = new Array(SIZE).fill(0);
-// 	for (var i=0; i<SIZE; i++)
-// 		for (var j=0; j<SIZE-i; j++)
-// 			c[i] = c[i] + buf[j]*buf[j+i];
-
-// 	var d=0; while (c[d]>c[d+1]) d++;
-// 	var maxval=-1, maxpos=-1;
-// 	for (var i=d; i<SIZE; i++) {
-// 		if (c[i] > maxval) {
-// 			maxval = c[i];
-// 			maxpos = i;
-// 		}
-// 	}
-//     // console.log('maxpos', maxpos);
-// 	var T0 = maxpos;
-
-// 	var x1=c[T0-1], x2=c[T0], x3=c[T0+1];
-// 	a = (x1 + x3 - 2*x2)/2;
-// 	b = (x3 - x1)/2;
-// 	if (a) T0 = T0 - b/(2*a);
-//     // console.log('T0', T0);
-// 	return sampleRate/T0;
-// }
-
-// function updatePitch() {
-//     console.log('in updatePitch', audioContext, currentPitch, currentTime);
-//     if (runPitch) {
-//         tonic = 261.63;
-//         pitchLims = [196, 783.99]
-//         analyser.getFloatTimeDomainData( buf );
-//         var ac = autoCorrelate( buf, audioContext.sampleRate );
-//         // var ac = 0
-//         // TODO: Paint confidence meter on canvasElem here.
-
-//         if (ac == -1) {
-//             currentPitch = null;
-//             currentTime = (new Date() - startTime)/1000;
-//         } else {
-//     currentPitch = 1200*Math.log2(ac/tonic);
-    
-//     //if ((currentPitch < pitchLims[0]) | (currentPitch > pitchLims[1]))   currentPitch = null;
-//     currentTime = (new Date() - startTime)/1000;
-//         }
-//         console.log('ac', ac, 'currentPitch', currentPitch, 'currentTime', currentTime);
-    
-// 	//rafID = window.requestAnimationFrame( updatePitch );
-//     if (runPitch) setTimeout(function(){
-//         updatePitch();
-//     }, 10);
-// }
-// else{
-//     clearInterval(pitchTimer);
-//     // clearInterval(drawTimer);
-// }
-// }
-
-function modelLoaded() {
-    console.log('in callback')
-    getPitch();
-}
-   
 function processData(allRows) {
 
    console.log(allRows);
@@ -265,63 +147,6 @@ function processData(allRows) {
     y: [ytext],
     text: [words]
    }, [2]);
-}
-
-function draw() {
-    
-    Plotly.extendTraces('myDiv', {
-                x: [[currentTime]], // the model detects pitches at every 0.01s by default
-              y: [[currentPitch]]
-            }, [0]);
-    if (runPitch) {
-        request = requestAnimationFrame(draw);
-    }
-}
-
-function shiftPlot() {
-    // shifts plot
-    if(runPitch) {
-        var secs = currentTime;
-        Plotly.update('myDiv', {},{
-            shapes: [
-
-            //line vertical
-
-            {
-              type: 'line',
-              x0: secs,
-              y0: -500,
-              x1: secs,
-              y1: 1900,
-              line: {
-                color: 'rgba(55, 128, 191, 0.5)',
-                width: 3
-              }
-            }, []]
-        })
-        Plotly.relayout('myDiv', {
-            xaxis: {
-                range: [secs-3, secs + 7]
-            }
-        });
-    }
-}
-
-function getPitch() {
-    // gets pitch
-    pitch.getPitch(function(err, frequency) {
-        tonic = 261.63; // hardcoded tonic for now, needs to be read from file
-        console.log(err, frequency, currentTime);
-        if (frequency) {
-            currentPitch = 1200*Math.log2(frequency/tonic);
-            currentTime = (new Date() - startTime)/1000;
-        }
-        else{
-            currentPitch = null;
-            currentTime = (new Date() - startTime)/1000;
-        }
-        if(runPitch) getPitch();
-    })
 }
 
 
