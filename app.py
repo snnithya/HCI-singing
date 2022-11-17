@@ -11,6 +11,10 @@ singing_data = {
 def index():
     return render_template('library.html')
 
+@app.route('/demo0')
+def demo0():
+    return render_template('demo0.html')
+
 @app.route('/demo1')
 def demo1():
     return render_template('demo1.html')

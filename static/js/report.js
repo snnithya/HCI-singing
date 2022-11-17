@@ -112,57 +112,99 @@ function plotOrigPitch(path) {
 function plotPitch() {
     // read data from csv and plot the OG contour
     plotOrigPitch(path);
+    data = JSON.parse(localStorage.getItem('stored_data'));
+    Plotly.extendTraces('myDiv', {
+                    x: [data["x"]], 
+                    y: [data["y"]]
+            }, [0]);
+            for (var i = 0; i < data["x"].length; i++) { 
+                // console.log(i)
+                time_ind = x.findIndex(element => {
+                if (element >= data["x"][i]) {
+                    return true;
+                  }
+                  return false;
+                })
+                orig_y = y[time_ind]
+                // if (typeof orig_y === 'string' && orig_y.length !== 0 && !!data["y"][i]) {
+                console.log(time_ind, orig_y, data["y"][i], (Math.abs(orig_y - data["y"][i]) <= 100))
+                // if (counter >0) {
+                //     // counter = 3;
+                if ((Math.abs(orig_y - data["y"][i]) <= 200)) {
+                    // plot_ind = 1
+                    // Plotly.extendTraces('myDiv', {
+                    //         x: [[data["x"][i]]], 
+                    //         y: [[data["y"][i]]]
+                    // }, [1]);
+                    Plotly.extendTraces('myDiv', {
+                            x: [[data["x"][i]]], 
+                            y: [[null]]
+                    }, [1]);
+                    correct++;
+                }
+                else {
+                    incorrect++;
+                    Plotly.extendTraces('myDiv', {
+                            x: [[data["x"][i]]], 
+                            y: [[data["y"][i]]]
+                    }, [1]);
 
-    // plot singer's pitch
-    fetch("/getmethod")
-    .then((response) => response.json())
-    .then((data) => { 
-        Plotly.extendTraces('myDiv', {
-                x: [data["x"]], 
-                y: [data["y"]]
-        }, [0]);
-        for (var i = 0; i < data["x"].length; i++) { 
-            // console.log(i)
-            time_ind = x.findIndex(element => {
-            if (element >= data["x"][i]) {
-                return true;
-              }
-              return false;
-            })
-            orig_y = y[time_ind]
-            // if (typeof orig_y === 'string' && orig_y.length !== 0 && !!data["y"][i]) {
-            console.log(time_ind, orig_y, data["y"][i], (Math.abs(orig_y - data["y"][i]) <= 100))
-            // if (counter >0) {
-            //     // counter = 3;
-            if ((Math.abs(orig_y - data["y"][i]) <= 200)) {
-                // plot_ind = 1
-                // Plotly.extendTraces('myDiv', {
-                //         x: [[data["x"][i]]], 
-                //         y: [[data["y"][i]]]
-                // }, [1]);
-                Plotly.extendTraces('myDiv', {
-                        x: [[data["x"][i]]], 
-                        y: [[null]]
-                }, [1]);
-                correct++;
-            }
-            else {
-                incorrect++;
-                Plotly.extendTraces('myDiv', {
-                        x: [[data["x"][i]]], 
-                        y: [[data["y"][i]]]
-                }, [1]);
+                }}
+                counter--;
+                console.log(counter, plot_ind)
+
+            
+            document.getElementById('score').innerHTML = 'Score: ' + String(Math.round(((correct)/(correct + incorrect))*10)) + '/10'
+        }
+            // plot singer's pitch
+    // fetch("/getmethod")
+    // .then((response) => response.json())
+    // .then((data) => { 
+    //     Plotly.extendTraces('myDiv', {
+    //             x: [data["x"]], 
+    //             y: [data["y"]]
+    //     }, [0]);
+    //     for (var i = 0; i < data["x"].length; i++) { 
+    //         // console.log(i)
+    //         time_ind = x.findIndex(element => {
+    //         if (element >= data["x"][i]) {
+    //             return true;
+    //           }
+    //           return false;
+    //         })
+    //         orig_y = y[time_ind]
+    //         // if (typeof orig_y === 'string' && orig_y.length !== 0 && !!data["y"][i]) {
+    //         console.log(time_ind, orig_y, data["y"][i], (Math.abs(orig_y - data["y"][i]) <= 100))
+    //         // if (counter >0) {
+    //         //     // counter = 3;
+    //         if ((Math.abs(orig_y - data["y"][i]) <= 200)) {
+    //             // plot_ind = 1
+    //             // Plotly.extendTraces('myDiv', {
+    //             //         x: [[data["x"][i]]], 
+    //             //         y: [[data["y"][i]]]
+    //             // }, [1]);
+    //             Plotly.extendTraces('myDiv', {
+    //                     x: [[data["x"][i]]], 
+    //                     y: [[null]]
+    //             }, [1]);
+    //             correct++;
+    //         }
+    //         else {
+    //             incorrect++;
+    //             Plotly.extendTraces('myDiv', {
+    //                     x: [[data["x"][i]]], 
+    //                     y: [[data["y"][i]]]
+    //             }, [1]);
                 
-            }}
+    //         }}
             // counter--;
             // console.log(counter, plot_ind)
             
         // }
-        document.getElementById('score').innerHTML = 'Score: ' + String(Math.round(((correct)/(correct + incorrect))*10)) + '/10'
-            // console.log(plot_ind, orig_y, data["y"][i], x[time_ind], data["x"][i])
-});
+//         document.getElementById('score').innerHTML = 'Score: ' + String(Math.round(((correct)/(correct + incorrect))*10)) + '/10'
+//             // console.log(plot_ind, orig_y, data["y"][i], x[time_ind], data["x"][i])
+// });
 
-}
 function processData(allRows) {
 
 //    console.log(allRows);
@@ -174,9 +216,9 @@ function processData(allRows) {
        row = allRows[i];
        x.push( parseFloat(row['time']));
        y.push( row['pitch'] );
-       console.log(row['pitch'], (row['pitch'] !== null))
+    //    console.log(row['pitch'], (row['pitch'] !== null))
     //    console.log(i, row)
-        console.log('logging word: ', row['word'])
+        // console.log('logging word: ', row['word'])
         if (row['pitch'] == ''){
         if(row['word'] != ''){
             xtext.push(row['time'])
@@ -194,7 +236,7 @@ function processData(allRows) {
     }
 
    }
-   console.log( 'X',x, 'Y',y, 'words', words );
+//    console.log( 'X',x, 'Y',y, 'words', words );
    Plotly.extendTraces('myDiv', {
     // mode: 'lines+text',
     x: [x], // the model detects pitches at every 0.01s by default

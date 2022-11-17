@@ -47,13 +47,15 @@ document.getElementById("stop").onclick = () => {
 function stopPractice() {
     runPitch = false;
     stored_data = document.getElementById("myDiv").data[0];
-    console.log(JSON.stringify(stored_data))
-    fetch("/postmethod", {
-        "method": "POST",
-        "mode": "cors",
-        "headers": {"Content-Type": "application/json"},
-        "body": JSON.stringify(stored_data),
-    })
+    console.log('in stop')
+    localStorage.setItem('stored_data', JSON.stringify(stored_data));
+    // console.log(JSON.stringify(stored_data));
+    // fetch("/postmethod", {
+    //     "method": "POST",
+    //     "mode": "cors",
+    //     "headers": {"Content-Type": "application/json"},
+    //     "body": JSON.stringify(stored_data),
+    // })
 }
 
 

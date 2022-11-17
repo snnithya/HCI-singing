@@ -32,11 +32,11 @@
 
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
     <!-- <script src="/static/scripts/plotly/dependencies/d3.v3.min.js"></script> -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <script src="{{ url_for('static',filename='js/singing.js') }}" defer></script>
+    <script src="../static/js/singing.js" defer></script>
 </head>
 
 <body>
@@ -58,7 +58,7 @@
             <h1></h1>
             <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="practice-test">Start Practice</button>
             <button class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice" id="stop">Stop</button>
-            <a href="{{ url_for( 'report') }} " class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice right " id="get-started ">Report</a>
+            <a href="../templates/report.html" class="waves-effect waves-light btn-flat btn-large indigo lighten-5 practice right " id="get-started ">Report</a>
         </div>
 
 
