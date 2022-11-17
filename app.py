@@ -13,23 +13,23 @@ def index():
 
 @app.route('/demo1')
 def demo1():
-    return render_template('demo/demo1.html')
+    return render_template('demo1.html')
 
 @app.route('/demo2')
 def demo2():
-    return render_template('demo/demo2.html')
+    return render_template('demo2.html')
 
 @app.route('/demo3')
 def demo3():
-    return render_template('demo/demo3.html')
+    return render_template('demo3.html')
 
 @app.route('/demo4')
 def demo4():
-    return render_template('demo/demo4.html')
+    return render_template('demo4.html')
 
 @app.route('/demo5')
 def demo5():
-    return render_template('demo/demo5.html')
+    return render_template('demo5.html')
 
 @app.route('/singing')
 def singing():

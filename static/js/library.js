@@ -3,6 +3,7 @@ const demoButton = document.getElementById("demoButton");
 
 function changeText(text) {
   document.getElementById("mySong").innerHTML = text;
+  console.log(singButton, demoButton)
   singButton.style.visibility = 'visible';
   demoButton.style.visibility = 'visible';
 };
@@ -83,6 +84,7 @@ let products = {
     card.onclick = function () {
         document.getElementById("mySong").innerHTML = i.songName;
         singButton.style.visibility = 'visible';
+        demoButton.style.visibility = 'visible';
     };
     document.getElementById("products").appendChild(card);
   }
