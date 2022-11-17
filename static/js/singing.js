@@ -88,9 +88,9 @@ async function setup() {
         y:Array(10).fill(null),
         text: Array(10).fill('lala'),
         textposition: top,
-        line: {
-            color: 'rgb(128, 128, 128)'
-        }
+        // line: {
+        //     color: 'rgb(128, 128, 128)'
+        // }
     },
     {// words from the song
     mode: 'text',

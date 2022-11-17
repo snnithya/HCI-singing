@@ -1,8 +1,10 @@
 const singButton = document.getElementById("singButton");
+const demoButton = document.getElementById("demoButton");
 
 function changeText(text) {
   document.getElementById("mySong").innerHTML = text;
   singButton.style.visibility = 'visible';
+  demoButton.style.visibility = 'visible';
 };
 
 

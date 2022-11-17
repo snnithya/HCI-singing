@@ -12,12 +12,15 @@
 </head>
 
 <body>
+
     <h1 class="choose">Choose a Song</h1>
 
     <h2 class="selected">You Selected: </h2>
 
     <h2 id="mySong"></h2>
 
+
+    <!-- <a href="{{ url_for('listening') }}" class="button" id="demo">Watch Demo</button> -->
     <form action="#">
 
 
@@ -25,6 +28,7 @@
 
 
             <a href="{{ url_for('listening') }}" class="singButton" id="singButton" style="visibility: hidden">Start Singing</button>
+            <a href="{{ url_for('listening') }}" class="singButton" id="demoButton">Watch a demo!</button>  
           
       
         </div>  
