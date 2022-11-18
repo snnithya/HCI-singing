@@ -31,26 +31,26 @@ var yticks = []
 
 var songName_to_path = {
     "Rolling in the Deep": {
-        "audio_path": "../../static/audio/3_rolling_in_the_deep/3_rolling_in_the_deep_transpose_0.wav",
-        "pitch_path": "../../static/pitch/3_rolling_in_the_deep.csv",
+        "audio_path": "../static/audio/3_rolling_in_the_deep/3_rolling_in_the_deep_transpose_0.wav",
+        "pitch_path": "../static/pitch/3_rolling_in_the_deep.csv",
         "tonic": 261.63,
         "ylabels": [ 'C', 'D', 'E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D']
     },
     "Dangerous Woman": {
-        "audio_path": "../../static/audio/4_dangerous_woman/4_dangerous_woman_transpose_0.wav",
-        "pitch_path": "../../static/pitch/4_dangerous_woman.csv",
+        "audio_path": "../static/audio/4_dangerous_woman/4_dangerous_woman_transpose_0.wav",
+        "pitch_path": "../static/pitch/4_dangerous_woman.csv",
         "tonic": 329.63,
         "ylabels": ['E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D']
     },
     "The Scientist": {
-        "audio_path": "../../static/audio/2_the_scientist/2_the_scientist_transpose_0.wav",
-        "pitch_path": "../../static/pitch/2_the_scientist.csv",
+        "audio_path": "../static/audio/2_the_scientist/2_the_scientist_transpose_0.wav",
+        "pitch_path": "../static/pitch/2_the_scientist.csv",
         "tonic": 174.61,
         "ylabels": [ "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G",  "B", "C#", "D#"]
     },
     "She Will be Loved": {
-        "audio_path": "../../static/audio/1_she_will_be_loved/1_she_will_be_loved_transpose_0.wav",
-        "pitch_path": "../../static/pitch/1_she_will_be_loved.csv",
+        "audio_path": "../static/audio/1_she_will_be_loved/1_she_will_be_loved_transpose_0.wav",
+        "pitch_path": "../static/pitch/1_she_will_be_loved.csv",
        "tonic": 155.56,
        "ylabels": ["D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G"]
     }
