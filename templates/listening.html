@@ -19,7 +19,7 @@
 
     <!-- Tone Library recommended in Bitrate slack channel for music conversations -->
     <script src="https://cdn.jsdelivr.net/npm/@tonaljs/tonal/browser/tonal.min.js"></script>
-    <title>Let's practice!</title>
+    <title>Let's Listen!</title>
 
     <!-- Materialize UI CSS and JS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -46,11 +46,31 @@
     </nav>
     <h2></h2>
 
+
     <div class="container">
 
 
         <h4 style="font-family: 'Nanum Myeongjo', serif;">Let's Listen! </h4>
+
         <h5 id="songName" style="font-family: 'Nanum Myeongjo', serif;"> </h5>
+        <a href="../templates/demo0.html" class="waves-effect waves-light btn-flat btn-large red lighten-3 right" id="help">Help!</a>
+
+        <form>
+            <label>Pitch</label>
+            <select id="pitch">
+                <option value = "O" selected>Original Key</option>
+                <option value = "-6">Lower Pitch</option>
+                <option value = "6">Higher Pitch</option>
+            </select>
+        </form>
+        <form>
+            <label>Tempo</label>
+            <select id="tempo">
+                <option value = "O" selected>Original Tempo</option>
+                <option value = "0.75">Slower</option>
+                <option value = "1.25">Faster</option>
+            </select>
+        </form>
         <div id="myDiv"></div>
 
         <div id="test1 " class="col s16 ">

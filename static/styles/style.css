@@ -1,6 +1,7 @@
 body {
     margin: 0;
 }
+
 .start-button {
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -28,8 +29,19 @@ nav .brand-logo {
     margin-top: 15px;
 }
 
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
-    box-shadow: 0 0px 0px 0 rgba(0,0,0,0), 0 0px 0px 0px rgba(0,0,0,0), 0 0px 0px 0 rgba(0,0,0,0);
+.z-depth-1,
+nav,
+.card-panel,
+.card,
+.toast,
+.btn,
+.btn-large,
+.btn-small,
+.btn-floating,
+.dropdown-content,
+.collapsible,
+.sidenav {
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
 }
 
 .locked {
@@ -43,24 +55,30 @@ nav .brand-logo {
     border-bottom-color: #eeeeee;
     border-top-style: solid;
     border-top-width: thin;
-    border-top-color:#eeeeee;
+    border-top-color: #eeeeee;
 }
+
 .tabs .tab a {
     color: darkslategray;
     font-family: 'Roboto', sans-serif;
 }
 
-.tabs .tab a:focus, .tabs .tab a:focus.active {
+.tabs .tab a:focus,
+.tabs .tab a:focus.active {
     background-color: #e8eaf6;
     color: black;
     outline: none;
     border: none;
 }
-.tabs .tab a:hover, .tabs .tab a.active {
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
     background-color: #e8eaf6;
     color: black;
 }
-.tabs .tab.disabled a, .tabs .tab.disabled a:hover {
+
+.tabs .tab.disabled a,
+.tabs .tab.disabled a:hover {
     color: lightgrey;
     cursor: default;
 }
@@ -82,24 +100,25 @@ a.back {
 .tabs .indicator {
     height: 0px;
 }
+
 .note-container {
     height: 100px;
     width: 40px;
     float: left;
 }
 
-.note-label {   
-    height: 34px;   
-    width:100%;  
-    font-size:19px;
+.note-label {
+    height: 34px;
+    width: 100%;
+    font-size: 19px;
     margin-bottom: 1px;
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-.range-label {   
-    height: 16px;   
-    width:100%;  
-    font-size:12px;
+.range-label {
+    height: 16px;
+    width: 100%;
+    font-size: 12px;
     margin-bottom: 1px;
     font-family: 'Nanum Myeongjo', sans-serif;
     font-weight: 700;
@@ -138,4 +157,9 @@ h5 {
 
 .next-icon {
     vertical-align: bottom;
+}
+
+select {
+    display: block;
+    width: 20%;
 }

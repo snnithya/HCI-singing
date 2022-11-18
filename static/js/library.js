@@ -13,6 +13,22 @@ function changeText(text) {
 let products = {
     data: [
       {
+        songName: "Rolling in the Deep",
+        category: "Pop",
+      },
+      {
+        songName: "She Will be Loved",
+        category: "Pop",
+      },
+      {
+        songName: "Dangerous Woman",
+        category: "Pop",
+      },
+      {
+        songName: "The Scientist",
+        category: "Pop",
+      },
+      {
         songName: "One Nation Under a Groove",
         category: "Funk",
       },
@@ -29,14 +45,6 @@ let products = {
         category: "Funk",
       },
       {
-        songName: "She Will be Loved",
-        category: "Pop",
-      },
-      {
-        songName: "The Scientist",
-        category: "Pop",
-      },
-      {
         songName: "Take Five",
         category: "Jazz",
       },
@@ -49,18 +57,9 @@ let products = {
         songName: "Halo",
         category: "Pop",
       },
-
-      {
-        songName: "Dangerous Woman",
-        category: "Pop",
-      },
       {
         songName: "The Boys Are Back in Town",
         category: "Rock",
-      },
-      {
-        songName: "Rolling in the Deep",
-        category: "Pop",
       }
     ],
   };
@@ -78,14 +77,15 @@ let products = {
     name.classList.add("product-name");
     name.innerText = i.songName;
     container.appendChild(name);
-   
     card.appendChild(container);
     card.style="cursor: pointer"
     card.onclick = function () {
         document.getElementById("mySong").innerHTML = i.songName;
         singButton.style.visibility = 'visible';
         demoButton.style.visibility = 'visible';
+        localStorage.setItem('Song Name', i.songName);  // store song name in local storage
     };
+    
     document.getElementById("products").appendChild(card);
   }
   //parameter passed from button (Parameter same as category)
@@ -140,4 +140,5 @@ let products = {
   //Initially display all products
   window.onload = () => {
     filterProduct("all");
+    localStorage.clear();
   };

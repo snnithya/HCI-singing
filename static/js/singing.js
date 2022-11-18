@@ -23,21 +23,27 @@ var buflen = 2048;
 var buf = new Float32Array( buflen );
 var pitchTimer = null;
 var drawTimer = null;
-var path = "../static/pitch/RITD-100-0.csv";
+var csv_path = null;
 var x = [];
 var y = [];
 var pitch;
 var mic;
 let audioContext;
+var songName_to_path;
+var pitch_vals;
+var tempo_vals;
+var tempoScaling_vals;
+var tonic;
 
-window.onload = function() {
+window.onpageshow = function() {
     setup;
+    csv_path = localStorage.getItem('csv_path');
+    tempoScalingVal = localStorage.getItem('tempoScalingVal');
+    tonic = parseFloat(localStorage.getItem('tonic'));
+    yticks = JSON.parse(localStorage.getItem('yticks'));
+    console.log(yticks)
 }
 
-// document.getElementById("practice-test").onclick = () => {
-//     startPractice()
-//     console.log('starting practice')
-// }
 document.getElementById("practice-test").addEventListener("click", micListen);
 document.getElementById("stop").onclick = () => {
     stopPractice();
@@ -49,13 +55,6 @@ function stopPractice() {
     stored_data = document.getElementById("myDiv").data[0];
     console.log('in stop')
     localStorage.setItem('stored_data', JSON.stringify(stored_data));
-    // console.log(JSON.stringify(stored_data));
-    // fetch("/postmethod", {
-    //     "method": "POST",
-    //     "mode": "cors",
-    //     "headers": {"Content-Type": "application/json"},
-    //     "body": JSON.stringify(stored_data),
-    // })
 }
 
 
@@ -67,6 +66,7 @@ function startPractice() {
 // Pitch Detection
 
 async function setup() {
+    console.log('in setup')
     // initialise plots
     await Plotly.newPlot('myDiv', 
     [{// correctly sung parts
@@ -75,15 +75,6 @@ async function setup() {
         y:Array(10).fill(null),
        
     },
-    // {// incorrectly sung parts
-
-    //     x:Array.from(Array(10).keys()),
-    //     y:Array(10).fill(null),
-    //     line: {
-    //         color: 'rgb(128, 0, 0)'
-    //     }
-
-    // },
     {// contour of original song
     mode: 'lines',
         x:Array.from(Array(10).keys()),
@@ -103,7 +94,9 @@ async function setup() {
     ], 
     {
         yaxis: {
-            range: [-500, 1900]
+            range: [-500, 1900],
+            tickvals: [-400, -200, 0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800],
+            ticktext: yticks
         },
         xaxis: {
             range: [-3, 7]
@@ -124,15 +117,15 @@ async function setup() {
         }
         }]
     });
-    plotOrigPitch(path);
+    plotOrigPitch(csv_path);
     audioContext = getAudioContext();
     mic = await new p5.AudioIn();
     // mic.start(startPitch);
 }
 
-function plotOrigPitch(path) {
-    // console.log('in plot orgi pitch', path);
-    Plotly.d3.csv(path, function(data){ processData(data) } );
+function plotOrigPitch(csv_path) {
+    // console.log('in plot orgi pitch', csv_path);
+    Plotly.d3.csv(csv_path, function(data){ processData(data) } );
 }
 
 function micListen() {
@@ -153,6 +146,7 @@ async function startPitch() {
     setInterval(shiftPlot, 5);    // call to shift the plot every 500 ms
     // console.log(audioContext, stream);
     pitch = ml5.pitchDetection('../static/js/model', audioContext , mic.stream, modelLoaded); // pitch detection
+    console.log(pitch)
     requestAnimationFrame(true_draw);
 }
 
@@ -163,19 +157,19 @@ function modelLoaded() {
    
 function processData(allRows) {
 
-//    console.log(allRows);
+    console.log(allRows);
    var words = [], ytext = [], xtext = [];
    prev_y = 500;
 
    for (var i=0; i<allRows.length; i++) {
        row = allRows[i];
-       x.push( parseFloat(row['time']));
+       x.push( parseFloat(row['time']) * tempoScalingVal);
        y.push( row['pitch'] );
     //    console.log(i, row)
         // console.log('logging word: ', row['word'])
         if (row['pitch'] == ''){
         if(row['word'] != ''){
-            xtext.push(row['time'])
+            xtext.push(parseFloat(row['time']) * tempoScalingVal)
             ytext.push(prev_y);
             words.push(row['word']);
         }
@@ -183,7 +177,7 @@ function processData(allRows) {
     else {
         prev_y = row['pitch'];
         if(row['word'] != '') {
-        xtext.push(row['time'])
+        xtext.push(parseFloat(row['time']) * tempoScalingVal)
         ytext.push(prev_y);
         words.push(row['word']);
     }
@@ -263,7 +257,7 @@ function getPitch() {
     // gets pitch
     console.log('in getPitch', runPitch, pitch)
     pitch.getPitch(function(err, frequency) {
-        tonic = 261.63; // hardcoded tonic for now, needs to be read from file
+         // hardcoded tonic for now, needs to be read from file
         console.log(err, frequency, currentTime);
         if (frequency) {
             currentPitch = 1200*Math.log2(frequency/tonic);

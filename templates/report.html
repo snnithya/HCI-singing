@@ -31,11 +31,11 @@
 
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
     <!-- <script src="/static/scripts/plotly/dependencies/d3.v3.min.js"></script> -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <script src="{{ url_for('static',filename='js/report.js') }}" defer></script>
+    <script src="../static/js/report.js" defer></script>
 </head>
 
 <body>
@@ -47,12 +47,17 @@
     <h2></h2>
 
     <div class="container">
+        <a href="../templates/demo8.html" class="waves-effect waves-light btn-flat btn-large red lighten-3 right" id="help">Help!</a>
 
-        <h4 class="right" style="font-family: 'Nanum Myeongjo', serif;" id="score">Score</h4>
         <h4 style="font-family: 'Nanum Myeongjo', serif;">Report </h4>
+        <h5 style="font-family: 'Nanum Myeongjo', serif;" id="score">Score</h5>
 
         <h5 id="songName" style="font-family: 'Nanum Myeongjo', serif;"> </h5>
-        <div id="myDiv"></div>
+        <div>
+            <div style="overflow-x: auto;" id="myDiv"></div>
+        </div>
+        <!-- <div id="yaxis" style="width: 800px; height: 40px"></div> -->
+
 
         <div id="test1" class="col s12">
             <h1></h1>
