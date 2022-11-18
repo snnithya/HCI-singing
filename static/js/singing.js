@@ -23,7 +23,7 @@ var buflen = 2048;
 var buf = new Float32Array( buflen );
 var pitchTimer = null;
 var drawTimer = null;
-var path = "static/pitch/RITD-100-0.csv";
+var path = "../static/pitch/RITD-100-0.csv";
 var x = [];
 var y = [];
 var pitch;
@@ -152,7 +152,7 @@ async function startPitch() {
 
     setInterval(shiftPlot, 5);    // call to shift the plot every 500 ms
     // console.log(audioContext, stream);
-    pitch = ml5.pitchDetection('static/js/model', audioContext , mic.stream, modelLoaded); // pitch detection
+    pitch = ml5.pitchDetection('../static/js/model', audioContext , mic.stream, modelLoaded); // pitch detection
     requestAnimationFrame(true_draw);
 }
 
