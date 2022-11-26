@@ -53,6 +53,18 @@ var songName_to_path = {
         "pitch_path": "../static/pitch/1_she_will_be_loved.csv",
        "tonic": 155.56,
        "ylabels": ["D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G"]
+    },
+    "Fly Me To The Moon": {
+        "audio_path": "../static/audio/5_fly_me_to_the_moon/5_fly_me_to_the_moon.wav",
+        "pitch_path": "../static/pitch/5_fly_me_to_the_moon.csv",
+       "tonic": 261.63,
+       "ylabels": ['E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D']
+    },
+    "All I Want For Christmas": {
+        "audio_path": "../static/audio/6_all_1_want_for_christmas/6_all_I_want_for_christmas.wav",
+        "pitch_path": "../static/pitch/6_all_1_want_for_christmas.csv",
+       "tonic": 392,
+       "ylabels": [ 'D', 'E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D']
     }
 }
 
