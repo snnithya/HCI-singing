@@ -29,37 +29,13 @@ let products = {
         category: "Pop",
       },
       {
-        songName: "One Nation Under a Groove",
-        category: "Funk",
-      },
-      {
-        songName: "My Favorite Things",
-        category: "Jazz",
-      },
-      {
-        songName: "Born to Be Wild",
-        category: "Rock",
-      },
-      {
-        songName: "Jungle Boogie",
-        category: "Funk",
-      },
-      {
-        songName: "Take Five",
-        category: "Jazz",
-      },
-      {
-        songName: "God Bless The Child",
+        songName: "Fly Me to the Moon",
         category: "Jazz",
       },
 
       {
-        songName: "Halo",
+        songName: "All I Want for Christmas is You",
         category: "Pop",
-      },
-      {
-        songName: "The Boys Are Back in Town",
-        category: "Rock",
       }
     ],
   };
