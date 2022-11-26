@@ -143,7 +143,7 @@ async function startPitch() {
     
     // mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
-    setInterval(shiftPlot, 5);    // call to shift the plot every 500 ms
+    setInterval(shiftPlot, 250);    // call to shift the plot every 500 ms
     // console.log(audioContext, stream);
     pitch = ml5.pitchDetection('../static/js/model', audioContext , mic.stream, modelLoaded); // pitch detection
     console.log(pitch)
