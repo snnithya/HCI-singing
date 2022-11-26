@@ -3,6 +3,12 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.myTitle {
+  position: absolute;
+  font-family: Snell Roundhand, cursive;
+  font-size: 50px;
+}
+
 .genre {
     position: absolute;
     left: 25%;
