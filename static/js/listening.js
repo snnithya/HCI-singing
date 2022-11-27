@@ -92,7 +92,7 @@ window.onload = function(){
 }
 
 document.getElementById("start").onclick = () => {
-    startPractice();
+    if (!runPitch) {startPractice();}
     console.log('starting practice')
 }
 
@@ -152,10 +152,13 @@ function stopPractice() {
 }
 
 function startPractice() {
-    runPitch = true;
+    
     startTime = new Date();
-    setup();
-    play(audio_path);
+    if(!runPitch){
+        setup();
+        play(audio_path);
+    }
+    runPitch = true;
 };
 
 // Pitch Detection
@@ -268,9 +271,12 @@ function processData(allRows) {
 
 async function play(audio_path) {
     console.log('in play');
-    audio = await new Audio(audio_path);
-    audio.play();
-    intTimer = setInterval(shiftPlot, 5);
+    if (!runPitch) {
+        audio = await new Audio(audio_path);
+        audio.play();
+        intTimer = setInterval(shiftPlot, 5);
+    }
+    
 
 }
 

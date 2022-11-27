@@ -34,6 +34,7 @@ var correct = 0;
 window.onload = function() {
     csv_path = localStorage.getItem('csv_path');
     tempoScalingVal = localStorage.getItem('tempoScalingVal');
+    //tempoScalingVal = 1;
     tonic = parseFloat(localStorage.getItem('tonic'));
     yticks = JSON.parse(localStorage.getItem('yticks'));
     setup();
@@ -56,7 +57,8 @@ async function setup() {
         y:Array(10).fill(null),
         line: {
             color: 'rgb(0, 128, 0)'
-        }
+        },
+        name: 'your singing (correct)'
 
     },
         { // incorrect plots
@@ -65,7 +67,8 @@ async function setup() {
         y:Array(10).fill(null),
         line: {
             color: 'rgb(128, 0, 0)'
-        }
+        },
+        name: 'your singing (incorrect)'
        
     },
     {
@@ -76,13 +79,15 @@ async function setup() {
         textposition: top,
         line: {
             color: 'rgb(128, 128, 128)'
-        }
+        },
+        name: 'original song'
     },
     {
     mode: 'text',
     x:Array.from(Array(10).keys()),
     y:Array(10).fill(null),
-        text: Array(10).fill('lala')
+        text: Array(10).fill('lala'),
+        name: 'song lyrics'
     },
     ], 
     {
