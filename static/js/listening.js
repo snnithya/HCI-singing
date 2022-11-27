@@ -54,16 +54,16 @@ var songName_to_path = {
        "tonic": 155.56,
        "ylabels": ["D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G", "B", "C#", "D#", "F", "G"]
     },
-    "Fly Me To The Moon": {
-        "audio_path": "../static/audio/5_fly_me_to_the_moon/5_fly_me_to_the_moon.wav",
+    "Fly Me to the Moon": {
+        "audio_path": "../static/audio/5_fly_me_to_the_moon/5_fly_me_to_the_moon_transpose_0.wav",
         "pitch_path": "../static/pitch/5_fly_me_to_the_moon.csv",
-       "tonic": 261.63,
+       "tonic": 130.81,
        "ylabels": ['E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D']
     },
-    "All I Want For Christmas": {
-        "audio_path": "../static/audio/6_all_1_want_for_christmas/6_all_I_want_for_christmas.wav",
-        "pitch_path": "../static/pitch/6_all_1_want_for_christmas.csv",
-       "tonic": 392,
+    "All I Want for Christmas is You": {
+        "audio_path": "../static/audio/6_all_I_want_for_christmas/6_all_I_want_for_christmas_transpose_0.wav",
+        "pitch_path": "../static/pitch/6_all_I_want_for_christmas.csv",
+       "tonic": 196,
        "ylabels": [ 'D', 'E', 'Gb', 'Ab', 'Bb', 'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D', 'E', 'Gb', 'Ab', 'Bb',  'C', 'D']
     }
 }
@@ -174,13 +174,18 @@ async function setup() {
         x:Array.from(Array(10).keys()),
         y:Array(10).fill(null),
         text: Array(10).fill('lala'),
-        textposition: top
+        textposition: top,
+        line: {
+            color: 'rgb(128, 128, 128)'
+        },
+        name: 'original song'
     },
     {
     mode: 'text',
     x:Array.from(Array(10).keys()),
     y:Array(10).fill(null),
-        text: Array(10).fill('lala')
+    text: Array(10).fill('lala'),
+    name: 'lyrics'
     },
     ],
     {

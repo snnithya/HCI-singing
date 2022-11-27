@@ -34,6 +34,7 @@ var pitch_vals;
 var tempo_vals;
 var tempoScaling_vals;
 var tonic;
+var songName = null;
 
 window.onpageshow = function() {
     setup;
@@ -42,6 +43,7 @@ window.onpageshow = function() {
     tonic = parseFloat(localStorage.getItem('tonic'));
     yticks = JSON.parse(localStorage.getItem('yticks'));
     console.log(yticks)
+    songName = localStorage.getItem("Song Name");
 }
 
 document.getElementById("practice-test").addEventListener("click", micListen);
@@ -67,12 +69,15 @@ function startPractice() {
 
 async function setup() {
     console.log('in setup')
+    
+    document.getElementById("songName").innerHTML = songName;
     // initialise plots
     await Plotly.newPlot('myDiv', 
-    [{// correctly sung parts
+    [{// user sung parts
         
         x:Array.from(Array(10).keys()),
         y:Array(10).fill(null),
+        name: 'your singing'
        
     },
     {// contour of original song
@@ -81,15 +86,17 @@ async function setup() {
         y:Array(10).fill(null),
         text: Array(10).fill('lala'),
         textposition: top,
-        // line: {
-        //     color: 'rgb(128, 128, 128)'
-        // }
+        line: {
+            color: 'rgb(128, 128, 128)'
+        },
+        name: 'original song'
     },
     {// words from the song
     mode: 'text',
     x:Array.from(Array(10).keys()),
     y:Array(10).fill(null),
-        text: Array(10).fill('lala')
+    text: Array(10).fill('lala'),
+    name: 'song lyrics'
     },
     ], 
     {
